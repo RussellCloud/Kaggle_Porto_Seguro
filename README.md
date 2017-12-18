@@ -16,7 +16,6 @@ lightgbm==2.0.10
 ### How to reproduce
 ```
 russell run --data 1befbe09a0af44bda89d3d5b7333c6aa:data --mode jupyter 
-
 ```
 
 #### Simple solution (recommended)
