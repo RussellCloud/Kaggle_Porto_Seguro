@@ -21,12 +21,12 @@ save_cv = True
 NFOLDS = 5
 kfold = StratifiedKFold(n_splits=NFOLDS, shuffle=True, random_state=218)
 
-train = pd.read_csv("../input/train.csv")
+train = pd.read_csv("/input/data/train.csv")
 train_label = train['target']
 train_id = train['id']
 del train['target'], train['id']
 
-test = pd.read_csv("../input/test.csv")
+test = pd.read_csv("/input/data/test.csv")
 test_id = test['id']
 del test['id']
 
@@ -113,7 +113,7 @@ for c in cat_fea:
     max_cat_values.append(np.max(x))
 
 # xgboost prediction
-train_fea0, test_fea0 = pickle.load(open("../input/fea0.pk"))
+train_fea0, test_fea0 = pickle.load(open("/input/data/fea0.pk"))
 
 cat_count_features = []
 for c in cat_fea + ['new_ind','new_reg','new_car']:
@@ -229,6 +229,6 @@ if cv_only:
         print(Gini(train_label, cv_train / (1. * (s + 1))))
         print(str(datetime.timedelta(seconds=time() - begintime)))
     if save_cv:
-        pd.DataFrame({'id': test_id, 'target': get_rank(cv_pred * 1./ (NFOLDS * num_seeds))}).to_csv('../model/keras5_pred.csv', index=False)
-        pd.DataFrame({'id': train_id, 'target': get_rank(cv_train * 1. / num_seeds)}).to_csv('../model/keras5_cv.csv', index=False)
+        pd.DataFrame({'id': test_id, 'target': get_rank(cv_pred * 1./ (NFOLDS * num_seeds))}).to_csv('/workspace/output/keras5_pred.csv', index=False)
+        pd.DataFrame({'id': train_id, 'target': get_rank(cv_train * 1. / num_seeds)}).to_csv('/workspace/output/keras5_cv.csv', index=False)
 

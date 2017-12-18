@@ -62,6 +62,8 @@ def proj_num_on_cat(train_df, test_df, target_column, group_column):
     test_df['train'] = 0
     all_df = train_df[['row_id', 'train', target_column, group_column]].append(test_df[['row_id','train',
                                                                                         target_column, group_column]])
+    del train_df,test_df
+    
     grouped = all_df[[target_column, group_column]].groupby(group_column)
     the_size = pd.DataFrame(grouped.size()).reset_index()
     the_size.columns = [group_column, '%s_size' % target_column]
@@ -71,9 +73,11 @@ def proj_num_on_cat(train_df, test_df, target_column, group_column):
     the_std.columns = [group_column, '%s_std' % target_column]
     the_median = pd.DataFrame(grouped.median()).reset_index()
     the_median.columns = [group_column, '%s_median' % target_column]
+    
     the_stats = pd.merge(the_size, the_mean)
     the_stats = pd.merge(the_stats, the_std)
     the_stats = pd.merge(the_stats, the_median)
+    del the_size,the_mean,the_std,the_median
 
     the_max = pd.DataFrame(grouped.max()).reset_index()
     the_max.columns = [group_column, '%s_max' % target_column]
@@ -82,11 +86,14 @@ def proj_num_on_cat(train_df, test_df, target_column, group_column):
 
     the_stats = pd.merge(the_stats, the_max)
     the_stats = pd.merge(the_stats, the_min)
+    del the_max,the_min
 
     all_df = pd.merge(all_df, the_stats, how='left')
 
     selected_train = all_df[all_df['train'] == 1]
     selected_test = all_df[all_df['train'] == 0]
+    del all_df
+    
     selected_train.sort_values('row_id', inplace=True)
     selected_test.sort_values('row_id', inplace=True)
     selected_train.drop([target_column, group_column, 'row_id', 'train'], axis=1, inplace=True)

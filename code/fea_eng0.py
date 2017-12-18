@@ -11,12 +11,12 @@ colsample_bytree = 0.85
 min_child_weight = 55
 num_boost_round = 500
 
-train = pd.read_csv("../input/train.csv")
+train = pd.read_csv("/input/data/train.csv")
 train_label = train['target']
 train_id = train['id']
 del train['target'], train['id']
 
-test = pd.read_csv("../input/test.csv")
+test = pd.read_csv("/input/data/test.csv")
 test_id = test['id']
 del test['id']
 
@@ -63,4 +63,4 @@ train_features = feature_results[:train_rows, :]
 test_features = feature_results[train_rows:, :]
 
 import pickle
-pickle.dump([train_features, test_features], open("../input/fea0.pk", 'wb'))
+pickle.dump([train_features, test_features], open("/input/data/fea0.pk", 'wb'))

@@ -37,7 +37,7 @@ def evalerror(preds, dtrain):
     labels = dtrain.get_label()
     return 'gini', Gini(labels, preds), True
 
-path = "../input/"
+path = "/input/data/"
 
 train = pd.read_csv(path+'train.csv')
 train_label = train['target']
@@ -162,6 +162,6 @@ for s in xrange(16):
         x_score.append(Gini(train_label, cv_train))
 
 print(x_score)
-pd.DataFrame({'id': test_id, 'target': final_cv_pred / 16.}).to_csv('../model/lgbm3_pred_avg.csv', index=False)
-pd.DataFrame({'id': train_id, 'target': final_cv_train / 16.}).to_csv('../model/lgbm3_cv_avg.csv', index=False)
+pd.DataFrame({'id': test_id, 'target': final_cv_pred / 16.}).to_csv('/workspace/output/lgbm3_pred_avg.csv', index=False)
+pd.DataFrame({'id': train_id, 'target': final_cv_train / 16.}).to_csv('/workspace/output//lgbm3_cv_avg.csv', index=False)
 
