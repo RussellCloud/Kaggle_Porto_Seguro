@@ -1,9 +1,9 @@
 ### Requirements
-
+```
 ROM>16G
 Python2.7
-*older or newer version of below packages should theoretically work fine*
 
+*older or newer version of below packages should theoretically work fine*
 numpy==1.13.3
 pandas==0.20.3
 sklearn==0.19.1
@@ -11,7 +11,7 @@ keras==2.1.1
 tensorflow==1.4.0
 xgboost==0.6
 lightgbm==2.0.10
-
+```
 
 ### How to reproduce
 ```
