@@ -1,6 +1,6 @@
 ### Requirements
 ```
-ROM>16G
+RAM > 16G
 Python2.7
 
 *older or newer version of below packages should theoretically work fine*
